@@ -15,18 +15,18 @@ class BspiderSpider(scrapy.Spider):
     def parse(self, response):
         chapters_links = response.xpath('//*[@class="title"]//a/@href').extract()
         manga_name = response.url.split("/")[-1]
-        for chapter_link in chapters_links:
-            yield scrapy.Request(urljoin("https://blogtruyen.vn",chapter_link), callback=self.parse_chapter, meta={"manga_name": manga_name})
+        for index, chapter_link in enumerate(chapters_links):
+            yield scrapy.Request(urljoin("https://blogtruyen.vn",chapter_link), callback=self.parse_chapter, meta={"manga_name": manga_name, "chapter_name": f"chapter-{index}"})
 
     def parse_chapter(self, response):
-        chapter_name = response.url.rsplit('/', 1)[-1]
+        chapter_name = response.meta["chapter_name"]
         manga_name = response.meta["manga_name"]
         # Extract image URLs
         img_urls = response.xpath('//*[@id="content"]//img/@src').extract()
 
         for idx, img_url in enumerate(img_urls):
             img_url = response.urljoin(img_url)
-            img_name = f'image{idx}.jpg'
+            img_name = f'image-{idx}.jpg'
             img_path = f'manga/{manga_name}/{chapter_name}/{img_name}'
             
             yield {"chapter_name": chapter_name, "manga_name": manga_name, "img_url": img_url}
