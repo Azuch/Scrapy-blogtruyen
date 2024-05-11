@@ -30,7 +30,7 @@ class BspiderSpider(scrapy.Spider):
                 img_name = f'image-{idx}-{idx_url}.jpg'
                 img_path = f'manga/{manga_name}/{chapter_name}/{img_name}'
                 yield {"chapter_name": chapter_name, "manga_name": manga_name, "img_url": img_url}
-                yield scrapy.Request(url=img_url, meta={'img_path': img_path}, callback=self.save_img)
+                yield scrapy.Request(url=img_url, meta={'img_path': img_path, 'referer': response.url}, callback=self.save_img)
 
     def save_img(self, response):
         img_path = response.meta['img_path']
