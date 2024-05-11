@@ -26,10 +26,14 @@ ROBOTSTXT_OBEY = False
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
 DOWNLOAD_TIMEOUT = 5
-#DOWNLOAD_DELAY = 0.5
+# Configure logging
+LOG_ENABLED = True  # Enable logging
+LOG_LEVEL = 'DEBUG'  # Set log level (DEBUG, INFO, WARNING, ERROR, CRITICAL)
+LOG_FILE = 'scrapy.log'  # Set logfile path
+DOWNLOAD_DELAY = 0.5
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
 #COOKIES_ENABLED = False
