@@ -14,7 +14,6 @@ NEWSPIDER_MODULE = "blogtruyen.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-USER_AGENT = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0"
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -91,6 +90,18 @@ CONCURRENT_REQUESTS_PER_IP = 16
 #HTTPCACHE_DIR = "httpcache"
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = "scrapy.extensions.httpcache.FilesystemCacheStorage"
+
+DEFAULT_REQUEST_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:135.0) Gecko/20100101 Firefox/135.0",
+    "Referer": "https://truyenqqto.com/"
+}
+
+HTTP_PROXY = "http://192.168.59.10:8080"
+
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy.downloadermiddlewares.httpproxy.HttpProxyMiddleware': 1,
+    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': 2
+}
 
 # Set settings whose default value is deprecated to a future-proof value
 REQUEST_FINGERPRINTER_IMPLEMENTATION = "2.7"
